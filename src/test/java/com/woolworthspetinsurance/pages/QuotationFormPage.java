@@ -67,6 +67,8 @@ public class QuotationFormPage extends BasePage {
 		
 	}
 
+
+
 	public void setYourDateOfBirth(Integer day, Integer month, Integer year) {
 		driver.findElement(By.id("txtDOBDay")).sendKeys(String.format("%02d", day));
 		driver.findElement(By.id("txtDOBMonth")).sendKeys(String.format("%02d", month));
@@ -85,9 +87,13 @@ public class QuotationFormPage extends BasePage {
 	public void setPromocode(String promoCode) {
 		driver.findElement(By.id("txtPromotionCode")).sendKeys(promoCode);
 	}
-	
+
 	public String getPromocode() {
 		return driver.findElement(By.id("txtPromotionCode")).getAttribute("value");
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		driver.findElement(By.id("txtEmail")).sendKeys(emailAddress);
 	}
 
 	public boolean verifyModalPopupDisplayed() {
@@ -109,21 +115,25 @@ public class QuotationFormPage extends BasePage {
 
 	public List<QuotePackage> getPetQuoteDetails(String petName, String breed) throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Continue"))); 
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("mandatory")));
 		List<QuotePackage> quotePackages = new ArrayList<QuotePackage>();
 		List <WebElement> panels = driver.findElements(By.cssSelector(".panel"));
+		System.out.println("Processing for petname: "+petName);
 		for(WebElement element: panels) {
-			
 			boolean foundPetName = false;
 			Panel panel = new Panel(element);
+			System.out.println("Panel is Active: "+panel.isActive());
+			System.out.println("Panel is getCaption: "+panel.getCaption());
 			if (panel.isActive() && panel.getCaption().contains(petName)) {
 					foundPetName = true;
 			}
-			else if (panel.getTitle().equals(String.format("%s (%s)", petName,breed)))
+			System.out.println("Panel is getTitle: "+panel.getTitle());
+			if (panel.getTitle().equals(String.format("%s (%s)", petName,breed)))
 			{
 				panel.clickHeadingLink();
 				foundPetName = true;
 			}
+			System.out.println("Found: "+foundPetName);
 			if (foundPetName) {
 				List<WebElement> packages = panel.getPackages();
 				for (WebElement quotePackage:packages) {

@@ -3,7 +3,6 @@ package com.woolworthspetinsurance;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import com.planittesting.ioc.ObjectContainer;
 import com.woolworthspetinsurance.pages.HomePage;
 
 import cucumber.api.java.en.Given;
@@ -11,15 +10,8 @@ import cucumber.api.java.en.Then;
 
 
 public class OpenPetInsuranceDefinition {
-	private ObjectContainer container;
 	WebDriver driver;
 	HomePage homePage;
-	
-
-	public OpenPetInsuranceDefinition(ObjectContainer container) {
-		this.container = container;
-		driver = this.container.resolve(WebDriver.class);
-	}
 	
 
 	@Given("^the Woolworths PetInsurance website$")

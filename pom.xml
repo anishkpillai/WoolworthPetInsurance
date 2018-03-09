@@ -20,13 +20,6 @@
 
 	<dependencies>
 
-		<!-- planit -->
-		<dependency>
-			<groupId>com.planittesting</groupId>
-			<artifactId>java-ioc</artifactId>
-			<version>${java-ioc.version}</version>
-		</dependency>
-
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -103,12 +96,4 @@
       		</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>Planit Maven</id>
-			<name>Planit Git based Maven repository</name>
-			<url>https://git.planittesting.com/java/maven/tree/master/</url>
-		</repository>
-	</repositories>
 </project>

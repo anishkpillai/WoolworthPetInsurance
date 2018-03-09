@@ -14,7 +14,7 @@ public class Panel {
 	}
 	
 	public String getCaption() {
-		return element.findElement(By.tagName("h2")).getText();
+		return element.findElement(By.className("panel-title")).findElement(By.tagName("span")).getText();
 	}
 	
 	public String getTitle() {
@@ -23,6 +23,7 @@ public class Panel {
 	
 	public boolean isActive() {
 		return element.getAttribute("class").contains("active");
+
 	}
 	
 	public void clickHeadingLink() {

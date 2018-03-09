@@ -7,7 +7,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import com.planittesting.ioc.ObjectContainer;
 import com.woolworthspetinsurance.datatable.Cover;
 import com.woolworthspetinsurance.datatable.Pet;
 import com.woolworthspetinsurance.pages.HomePage;
@@ -18,17 +17,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class PetInsuranceQuoteDefinition {
-	private ObjectContainer container;
 	private WebDriver driver;
 	HomePage homePage;
 	QuotationFormPage quotePage;
 	private Map<String, Pet> petsMap;
-
-	public PetInsuranceQuoteDefinition(ObjectContainer container) {
-		this.container = container;
-		driver = this.container.resolve(WebDriver.class);
-	}
-
 
 	@Then("^verify list of steps in quote page$")
 	public void verify_list_of_steps_in_quote_page(List<String> steps) throws Throwable {
@@ -99,6 +91,12 @@ public class PetInsuranceQuoteDefinition {
 		if (quotePage.getPromocode().equals("")) {
 			quotePage.setPromocode(promoCode);
 		}
+	}
+
+	@When("^email is filled as \"([^\"]*)\"$")
+	public void email_is_filled_as(String emailAddress) throws Throwable {
+		quotePage = new QuotationFormPage(driver);
+		quotePage.setEmailAddress(emailAddress);
 	}
 
 	@Then("^promotion modal popup is displayed$")

@@ -1,16 +1,17 @@
 package com.woolworthspetinsurance.pages;
 
+import com.woolworthspetinsurance.GlobalHooks;
 import org.openqa.selenium.WebDriver;
 
 public class BasePage {
-	protected WebDriver driver;
+	public WebDriver driver;
 
 	public BasePage(WebDriver driver) {
-		this.driver = driver;
+		this.driver = GlobalHooks.globalDriver;
 	}
 
 	public HomePage navigateTo() {
-		driver.navigate().to("https://www.woolworthspetinsurance.com.au/");
+		driver.get("https://www.woolworthspetinsurance.com.au/");
 		return new HomePage(driver);
 	}
 }

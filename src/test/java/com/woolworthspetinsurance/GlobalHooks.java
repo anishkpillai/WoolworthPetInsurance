@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.planittesting.ioc.ObjectContainer;
+
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -17,13 +17,9 @@ import cucumber.api.java.Before;
 public class GlobalHooks {
 	
     private static boolean globalInit = false;
-    private static ObjectContainer globalContainer;
-    private static WebDriver globalDriver;
+    public static WebDriver globalDriver;
     
-    public GlobalHooks(ObjectContainer container) {
-    	globalContainer = container;
-    }
-    
+
     /*
 	 * this thread is used to quit the driver before the JVM shuts down
 	 */
@@ -65,6 +61,5 @@ public class GlobalHooks {
 		globalDriver.manage().window().maximize();
 		globalDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		globalDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		globalContainer.registerAs(globalDriver, WebDriver.class);
 	}
 }
